@@ -57,7 +57,7 @@ a {
   position: fixed;
   inset: 0;
   background: rgba(0, 0, 0, 0.5);
-  z-index: 499;
+  z-index: 600;
   visibility: hidden;
   opacity: 0;
   transition: opacity var(--transition), visibility var(--transition);
@@ -262,6 +262,7 @@ nav {
   border: none;
   cursor: pointer;
   display: none;
+  z-index: 700;
 }
 
 .close-nav-btn img {
@@ -375,9 +376,9 @@ picture img {
 }
 
 /* =====================
-   DESKTOP  (>= 1024px)
+   DESKTOP  (>= 768px)
 ===================== */
-@media (min-width: 1024px) {
+@media (min-width: 768px) {
   main {
     flex-direction: row-reverse;
     align-items: center;
@@ -420,12 +421,12 @@ picture img {
 }
 
 /* =====================
-   MOBILE  (< 1024px)
+   MOBILE  (< 768px)
    Nav panel slides in from the right.
    z-index 500: above page content, but BELOW overlay (999)
    so the overlay correctly covers and dims the nav panel.
 ===================== */
-@media (max-width: 1023px) {
+@media (max-width: 767px) {
   header {
     padding: 1.2rem 1.5rem;
     gap: 0;
