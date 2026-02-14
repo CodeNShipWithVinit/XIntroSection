@@ -491,18 +491,9 @@ picture img {
     display: flex;
   }
 
+  /* Registration buttons are in the header, not the nav panel — hide on mobile */
   .registration {
-    flex-direction: column;
-    width: 100%;
-    margin-left: 0;
-    gap: 0.8rem;
-  }
-
-  .registration button {
-    width: 100%;
-    text-align: center;
-    padding: 0.8rem;
-    font-size: 0.95rem;
+    display: none;
   }
 
   .plain-link a {
