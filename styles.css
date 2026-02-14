@@ -55,19 +55,16 @@ a {
   position: fixed;
   inset: 0;
   background: rgba(0,0,0,0.5);
-  z-index: 140;           /* ABOVE header (100) */
+  z-index: 90;
   visibility: hidden;
   opacity: 0;
-  pointer-events: none;   /* prevent blocking when hidden */
   transition: opacity var(--transition), visibility var(--transition);
 }
 
 .overlay.active {
   visibility: visible;
   opacity: 1;
-  pointer-events: auto;
 }
-
 
 /* =====================
    HEADER / NAV
@@ -94,7 +91,6 @@ nav {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  pointer-events: none;
   flex: 1;
 }
 
@@ -248,7 +244,7 @@ nav {
   border: none;
   cursor: pointer;
   margin-left: auto;
-  z-index: 120;
+  z-index: 140;
   padding: 0.25rem;
   position: relative;
 }
@@ -456,12 +452,10 @@ picture img {
     z-index: 150;
     transition: right 0.3s ease;
     box-shadow: -10px 0 40px rgba(0,0,0,0.08);
-    pointer-events: none;
   }
 
   nav.open {
     right: 0;
-    pointer-events: auto;
   }
 
   .nav-links {
