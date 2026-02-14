@@ -33,12 +33,12 @@ navLinks.forEach(navLink => {
 
   btn.addEventListener('click', (e) => {
     e.stopPropagation();
-    const isOpen = navLink.classList.contains('open');
+    const isOpen = navLink.classList.contains('link-open');
 
     // Close all other dropdowns
     navLinks.forEach(nl => {
       if (nl !== navLink) {
-        nl.classList.remove('open');
+        nl.classList.remove('link-open');
         const b = nl.querySelector('button');
         if (b) b.setAttribute('aria-expanded', 'false');
       }
@@ -46,10 +46,10 @@ navLinks.forEach(navLink => {
 
     // Toggle current
     if (isOpen) {
-      navLink.classList.remove('open');
+      navLink.classList.remove('link-open');
       btn.setAttribute('aria-expanded', 'false');
     } else {
-      navLink.classList.add('open');
+      navLink.classList.add('link-open');
       btn.setAttribute('aria-expanded', 'true');
     }
   });
@@ -60,7 +60,7 @@ navLinks.forEach(navLink => {
 document.addEventListener('click', (e) => {
   if (e.target.closest('#closeMenuBtn')) return;
   navLinks.forEach(navLink => {
-    navLink.classList.remove('open');
+    navLink.classList.remove('link-open');
     const btn = navLink.querySelector('button');
     if (btn) btn.setAttribute('aria-expanded', 'false');
   });

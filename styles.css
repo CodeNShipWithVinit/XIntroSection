@@ -50,13 +50,14 @@ a {
 
 /* =====================
    OVERLAY
-   z-index 999 — above everything including mobile nav (500)
+   z-index 499 — above page content, but BELOW the mobile nav panel (500)
+   so the nav's close button is never covered by the overlay.
 ===================== */
 .overlay {
   position: fixed;
   inset: 0;
   background: rgba(0, 0, 0, 0.5);
-  z-index: 999;
+  z-index: 499;
   visibility: hidden;
   opacity: 0;
   transition: opacity var(--transition), visibility var(--transition);
@@ -131,8 +132,8 @@ nav {
 .nav-link > button .arrow-up  { display: none; }
 .nav-link > button .arrow-down { display: inline; }
 
-.nav-link.open > button .arrow-up  { display: inline; }
-.nav-link.open > button .arrow-down { display: none; }
+.nav-link.link-open > button .arrow-up  { display: inline; }
+.nav-link.link-open > button .arrow-down { display: none; }
 
 /* Plain links */
 .plain-link a {
@@ -169,7 +170,7 @@ nav {
 .dropdown-list.features-list { min-width: 190px; }
 .dropdown-list.company-list  { min-width: 150px; }
 
-.nav-link.open .dropdown-list {
+.nav-link.link-open .dropdown-list {
   display: flex;
 }
 
@@ -486,7 +487,7 @@ picture img {
     z-index: auto;
   }
 
-  .nav-link.open .dropdown-list {
+  .nav-link.link-open .dropdown-list {
     display: flex;
   }
 
