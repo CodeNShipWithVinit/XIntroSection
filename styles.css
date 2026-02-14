@@ -1,0 +1,533 @@
+/* =====================
+   CSS RESET & VARIABLES
+===================== */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --almost-white: #fafafa;
+  --medium-gray: #696969;
+  --almost-black: #080c20;
+  --white: #ffffff;
+  --nav-link-clr: #696969;
+  --nav-hover: #080c20;
+  --dropdown-shadow: 0 10px 40px rgba(0,0,0,0.12);
+  --border-radius: 14px;
+  --transition: 0.22s ease;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  font-family: 'Epilogue', sans-serif;
+  background-color: var(--almost-white);
+  color: var(--almost-black);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+button {
+  cursor: pointer;
+  font-family: inherit;
+  border: none;
+  background: none;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* =====================
+   OVERLAY
+===================== */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 90;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity var(--transition), visibility var(--transition);
+}
+
+.overlay.active {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* =====================
+   HEADER / NAV
+===================== */
+header {
+  display: flex;
+  align-items: center;
+  gap: 3.5rem;
+  padding: 1.5rem 2.5rem;
+  position: relative;
+  z-index: 100;
+}
+
+.logo {
+  flex-shrink: 0;
+}
+
+.logo img {
+  height: 27px;
+  width: auto;
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex: 1;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 2.5rem;
+  list-style: none;
+}
+
+.nav-link {
+  position: relative;
+}
+
+.nav-link > button {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  color: var(--nav-link-clr);
+  font-size: 0.875rem;
+  font-weight: 500;
+  padding: 0.25rem 0;
+  transition: color var(--transition);
+  white-space: nowrap;
+}
+
+.nav-link > button:hover {
+  color: var(--nav-hover);
+}
+
+.nav-link > button .arrow-icon {
+  width: 10px;
+  height: 6px;
+  transition: transform var(--transition);
+}
+
+.nav-link > button .arrow-up { display: none; }
+.nav-link > button .arrow-down { display: inline; }
+
+.nav-link.open > button .arrow-up { display: inline; }
+.nav-link.open > button .arrow-down { display: none; }
+
+/* Plain links (no dropdown) */
+.plain-link a {
+  color: var(--nav-link-clr);
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: color var(--transition);
+}
+
+.plain-link a:hover {
+  color: var(--nav-hover);
+}
+
+/* =====================
+   DROPDOWN
+===================== */
+.dropdown-list {
+  position: absolute;
+  top: calc(100% + 1.1rem);
+  background: var(--white);
+  border-radius: var(--border-radius);
+  box-shadow: var(--dropdown-shadow);
+  padding: 1.4rem 1.5rem;
+  list-style: none;
+  min-width: 160px;
+  display: none;
+  flex-direction: column;
+  gap: 0.9rem;
+  z-index: 200;
+}
+
+.dropdown-list.features-list {
+  left: -1rem;
+  min-width: 190px;
+}
+
+.dropdown-list.company-list {
+  left: -1rem;
+  min-width: 150px;
+}
+
+.nav-link.open .dropdown-list {
+  display: flex;
+}
+
+.dropdown-link a {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  color: var(--medium-gray);
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: color var(--transition);
+  white-space: nowrap;
+}
+
+.dropdown-link a:hover {
+  color: var(--nav-hover);
+}
+
+.dropdown-link a img {
+  width: 14px;
+  height: 14px;
+  object-fit: contain;
+}
+
+/* =====================
+   REGISTRATION BUTTONS
+===================== */
+.registration {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-left: auto;
+}
+
+.registration button {
+  font-size: 0.875rem;
+  font-weight: 700;
+  padding: 0.65rem 1.3rem;
+  border-radius: 14px;
+  transition: background var(--transition), color var(--transition), border-color var(--transition);
+}
+
+.btn-login {
+  color: var(--medium-gray);
+}
+
+.btn-login:hover {
+  color: var(--almost-black);
+}
+
+.btn-register {
+  color: var(--almost-black);
+  border: 2px solid var(--medium-gray);
+}
+
+.btn-register:hover {
+  color: var(--white);
+  background: var(--almost-black);
+  border-color: var(--almost-black);
+}
+
+/* =====================
+   MOBILE MENU TOGGLE
+===================== */
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-left: auto;
+  z-index: 140;
+  padding: 0.25rem;
+  position: relative;
+}
+
+.menu-toggle img {
+  width: 32px;
+  height: auto;
+}
+
+/* Hide hamburger when nav panel is open */
+nav.open ~ .menu-toggle,
+header:has(nav.open) .menu-toggle {
+  visibility: hidden;
+}
+
+/* =====================
+   MAIN / HERO
+===================== */
+main {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Desktop layout: side by side */
+@media (min-width: 1024px) {
+  main {
+    flex-direction: row-reverse;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 3rem 2.5rem;
+    gap: 4rem;
+  }
+}
+
+/* Hero image container */
+picture {
+  display: block;
+  width: 100%;
+}
+
+picture img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+@media (min-width: 1024px) {
+  picture {
+    flex: 0 0 480px;
+    max-width: 480px;
+  }
+
+  picture img {
+    border-radius: 12px;
+  }
+}
+
+/* Text content */
+.text-content {
+  padding: 2.5rem 1.5rem 3rem;
+  text-align: center;
+}
+
+@media (min-width: 1024px) {
+  .text-content {
+    flex: 1;
+    text-align: left;
+    padding: 4rem 0 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 2.5rem;
+  }
+}
+
+.text-content h1 {
+  font-size: clamp(2.2rem, 5vw, 4.5rem);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--almost-black);
+  margin-bottom: 1.2rem;
+}
+
+@media (min-width: 1024px) {
+  .text-content h1 {
+    margin-bottom: 0;
+  }
+}
+
+.text-content p {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--medium-gray);
+  max-width: 38ch;
+  margin: 0 auto 2rem;
+}
+
+@media (min-width: 1024px) {
+  .text-content p {
+    margin: 0 0 2.5rem;
+    font-size: 1.05rem;
+  }
+}
+
+.btn-learn-more {
+  display: inline-block;
+  background: var(--almost-black);
+  color: var(--white);
+  font-family: 'Epilogue', sans-serif;
+  font-weight: 700;
+  font-size: 0.95rem;
+  padding: 0.9rem 1.7rem;
+  border-radius: 14px;
+  border: 2px solid transparent;
+  transition: background var(--transition), color var(--transition), border-color var(--transition);
+  text-decoration: none;
+}
+
+.btn-learn-more:hover {
+  background: var(--white);
+  color: var(--almost-black);
+  border-color: var(--almost-black);
+}
+
+/* =====================
+   CLIENT LOGOS
+===================== */
+.clients {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.8rem;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+}
+
+@media (min-width: 1024px) {
+  .clients {
+    justify-content: flex-start;
+    gap: 2.5rem;
+    margin-top: 4rem;
+  }
+}
+
+.clients img {
+  height: 14px;
+  width: auto;
+  object-fit: contain;
+  opacity: 0.7;
+  transition: opacity var(--transition);
+}
+
+.clients img:hover {
+  opacity: 1;
+}
+
+/* =====================
+   FOOTER ATTRIBUTION
+===================== */
+.attribution {
+  font-size: 0.72rem;
+  text-align: center;
+  padding: 1rem;
+  color: var(--medium-gray);
+}
+
+.attribution a {
+  color: var(--almost-black);
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+.attribution a:hover {
+  color: var(--medium-gray);
+}
+
+/* =====================
+   MOBILE NAV PANEL
+===================== */
+@media (max-width: 1023px) {
+  header {
+    padding: 1.2rem 1.5rem;
+    gap: 0;
+  }
+
+  .menu-toggle {
+    display: block;
+  }
+
+  nav {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 68%;
+    max-width: 280px;
+    height: 100%;
+    background: var(--white);
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 5rem 1.5rem 2rem;
+    gap: 2rem;
+    z-index: 150;
+    transition: right 0.3s ease;
+    box-shadow: -10px 0 40px rgba(0,0,0,0.08);
+  }
+
+  nav.open {
+    right: 0;
+  }
+
+  .nav-links {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.2rem;
+    width: 100%;
+  }
+
+  .nav-link > button {
+    font-size: 1rem;
+  }
+
+  .dropdown-list {
+    position: static;
+    box-shadow: none;
+    padding: 1rem 0 0 1.2rem;
+    display: none;
+    gap: 0.85rem;
+  }
+
+  .nav-link.open .dropdown-list {
+    display: flex;
+  }
+
+  .registration {
+    flex-direction: column;
+    width: 100%;
+    margin-left: 0;
+    gap: 0.8rem;
+  }
+
+  .registration button {
+    width: 100%;
+    text-align: center;
+    padding: 0.8rem;
+    font-size: 0.95rem;
+  }
+
+  .btn-login {
+    color: var(--medium-gray);
+  }
+
+  .btn-register {
+    border: 2px solid var(--medium-gray);
+  }
+
+  .plain-link a {
+    font-size: 1rem;
+  }
+}
+
+/* =====================
+   CLOSE BUTTON INSIDE NAV (mobile)
+===================== */
+.close-nav-btn {
+  position: absolute;
+  top: 1.2rem;
+  right: 1.5rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: none;
+}
+
+.close-nav-btn img {
+  width: 26px;
+  height: 26px;
+}
+
+@media (max-width: 1023px) {
+  .close-nav-btn {
+    display: block;
+  }
+}

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Snap – Make remote work</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+
+  <!-- Overlay for mobile menu -->
+  <div class="overlay" id="overlay"></div>
+
+  <!-- HEADER -->
+  <header>
+    <!-- Logo -->
+    <div class="logo">
+      <img src="./assets/images/logo.svg" alt="snap's logo" />
+    </div>
+
+    <!-- Mobile open-menu toggle -->
+    <button class="menu-toggle" id="openMenuBtn" aria-label="Open menu" aria-expanded="false" aria-controls="mainNav">
+      <img src="./assets/images/icon-menu.svg" alt="open menu" class="open-menu" />
+    </button>
+
+    <!-- Navigation -->
+    <nav id="mainNav">
+      <!-- Mobile close button -->
+      <button class="close-nav-btn" id="closeMenuBtn" aria-label="Close menu">
+        <img src="./assets/images/icon-close-menu.svg" alt="close menu" class="close-menu" />
+      </button>
+
+      <!-- Nav links -->
+      <ul class="nav-links">
+
+        <!-- Features Dropdown -->
+        <li class="nav-link" id="featuresNav">
+          <button aria-haspopup="true" aria-expanded="false" id="featuresBtn">
+            Features
+            <img src="./assets/images/icon-arrow-down.svg" alt="" class="arrow-icon arrow-down" aria-hidden="true" />
+            <img src="./assets/images/icon-arrow-up.svg" alt="" class="arrow-icon arrow-up" aria-hidden="true" />
+          </button>
+          <ul class="dropdown-list features-list" role="menu">
+            <li class="dropdown-link" role="menuitem">
+              <a href="#" aria-label="todo-list">
+                <img src="./assets/images/icon-todo.svg" alt="" />
+                Todo List
+              </a>
+            </li>
+            <li class="dropdown-link" role="menuitem">
+              <a href="#">
+                <img src="./assets/images/icon-calendar.svg" alt="" />
+                Calendar
+              </a>
+            </li>
+            <li class="dropdown-link" role="menuitem">
+              <a href="#">
+                <img src="./assets/images/icon-reminders.svg" alt="" />
+                Reminders
+              </a>
+            </li>
+            <li class="dropdown-link" role="menuitem">
+              <a href="#">
+                <img src="./assets/images/icon-planning.svg" alt="" />
+                Planning
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <!-- Company Dropdown -->
+        <li class="nav-link" id="companyNav">
+          <button aria-haspopup="true" aria-expanded="false" id="companyBtn">
+            Company
+            <img src="./assets/images/icon-arrow-down.svg" alt="" class="arrow-icon arrow-down" aria-hidden="true" />
+            <img src="./assets/images/icon-arrow-up.svg" alt="" class="arrow-icon arrow-up" aria-hidden="true" />
+          </button>
+          <ul class="dropdown-list company-list" role="menu">
+            <li class="dropdown-link" role="menuitem"><a href="#">History</a></li>
+            <li class="dropdown-link" role="menuitem"><a href="#">Our Team</a></li>
+            <li class="dropdown-link" role="menuitem"><a href="#">Blog</a></li>
+          </ul>
+        </li>
+
+        <!-- Plain links -->
+        <li class="plain-link"><a href="#">Careers</a></li>
+        <li class="plain-link"><a href="#">About</a></li>
+
+      </ul>
+
+      <!-- Registration buttons -->
+      <div class="registration">
+        <button class="btn-login">Login</button>
+        <button class="btn-register">Register</button>
+      </div>
+    </nav>
+  </header>
+
+  <!-- MAIN -->
+  <main>
+    <!-- Hero image -->
+    <picture>
+      <source srcset="./assets/images/image-hero-desktop.png" media="(min-width: 1024px)" />
+      <img
+        src="./assets/images/image-hero-mobile.png"
+        alt="Snap hero illustration"
+      />
+    </picture>
+
+    <!-- Hero text -->
+    <div class="text-content">
+      <h1>Make remote work</h1>
+      <p>Get your team in sync, no matter your location. Streamline processes, create team rituals, and watch productivity soar.</p>
+      <a href="#" class="btn-learn-more">Learn more</a>
+
+      <!-- Client logos -->
+      <div class="clients">
+        <img src="./assets/images/client-databiz.svg" alt="Databiz" />
+        <img src="./assets/images/client-audiophile.svg" alt="Audiophile" />
+        <img src="./assets/images/client-meet.svg" alt="Meet" />
+        <img src="./assets/images/client-maker.svg" alt="Maker" />
+      </div>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <p class="attribution">
+      Challenge by <a href="https://crio.do" target="_blank">Crio.do</a>.
+      Coded by <a href="https://github.com/CodeNShipWithVinit" target="_blank">Vinit</a>.
+    </p>
+  </footer>
+
+  <script src="./script.js"></script>
+
+</body>
+</html>
