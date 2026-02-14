@@ -50,32 +50,35 @@ a {
 
 /* =====================
    OVERLAY
+   z-index 999 — above everything including mobile nav (500)
 ===================== */
 .overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.5);
-  z-index: 160;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 999;
   visibility: hidden;
   opacity: 0;
   transition: opacity var(--transition), visibility var(--transition);
+  pointer-events: none;
 }
 
 .overlay.active {
   visibility: visible;
   opacity: 1;
+  pointer-events: auto;
 }
 
 /* =====================
    HEADER / NAV
+   No position/z-index on header — avoids creating a stacking
+   context that would trap elements below the overlay.
 ===================== */
 header {
   display: flex;
   align-items: center;
   gap: 3.5rem;
   padding: 1.5rem 2.5rem;
-  position: relative;
-  z-index: 200;
 }
 
 img.logo {
@@ -89,8 +92,6 @@ nav {
   align-items: center;
   justify-content: space-between;
   flex: 1;
-  position: relative;
-  z-index: 200;
 }
 
 .nav-links {
@@ -100,8 +101,10 @@ nav {
   list-style: none;
 }
 
+/* Each .nav-link is the stacking parent for its own dropdown */
 .nav-link {
   position: relative;
+  z-index: 100;
 }
 
 .nav-link > button {
@@ -123,16 +126,15 @@ nav {
 .nav-link > button .arrow-icon {
   width: 10px;
   height: 6px;
-  transition: transform var(--transition);
 }
 
-.nav-link > button .arrow-up { display: none; }
+.nav-link > button .arrow-up  { display: none; }
 .nav-link > button .arrow-down { display: inline; }
 
-.nav-link.open > button .arrow-up { display: inline; }
+.nav-link.open > button .arrow-up  { display: inline; }
 .nav-link.open > button .arrow-down { display: none; }
 
-/* Plain links (no dropdown) */
+/* Plain links */
 .plain-link a {
   color: var(--nav-link-clr);
   font-size: 0.875rem;
@@ -146,10 +148,12 @@ nav {
 
 /* =====================
    DROPDOWN
+   z-index 200 — above sibling nav items, below overlay
 ===================== */
 .dropdown-list {
   position: absolute;
   top: calc(100% + 1.1rem);
+  left: -1rem;
   background: var(--white);
   border-radius: var(--border-radius);
   box-shadow: var(--dropdown-shadow);
@@ -162,15 +166,8 @@ nav {
   z-index: 200;
 }
 
-.dropdown-list.features-list {
-  left: -1rem;
-  min-width: 190px;
-}
-
-.dropdown-list.company-list {
-  left: -1rem;
-  min-width: 150px;
-}
+.dropdown-list.features-list { min-width: 190px; }
+.dropdown-list.company-list  { min-width: 150px; }
 
 .nav-link.open .dropdown-list {
   display: flex;
@@ -235,17 +232,16 @@ nav {
 }
 
 /* =====================
-   MOBILE MENU TOGGLE
+   MOBILE MENU TOGGLE (hamburger)
+   Hidden on desktop
 ===================== */
 .menu-toggle {
   display: none;
-  background: none;
-  border: none;
   cursor: pointer;
   margin-left: auto;
-  z-index: 140;
   padding: 0.25rem;
-  position: relative;
+  background: none;
+  border: none;
 }
 
 .menu-toggle img {
@@ -253,33 +249,33 @@ nav {
   height: auto;
 }
 
-/* Hide hamburger when nav panel is open */
-nav.open ~ .menu-toggle,
-header:has(nav.open) .menu-toggle {
-  visibility: hidden;
+/* =====================
+   CLOSE BUTTON INSIDE NAV
+   Hidden on desktop
+===================== */
+.close-nav-btn {
+  position: absolute;
+  top: 1.2rem;
+  right: 1.5rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: none;
+}
+
+.close-nav-btn img {
+  width: 26px;
+  height: 26px;
 }
 
 /* =====================
-   MAIN / HERO
+   MAIN / HERO — base (mobile-first)
 ===================== */
 main {
   display: flex;
   flex-direction: column;
 }
 
-/* Desktop layout: side by side */
-@media (min-width: 1024px) {
-  main {
-    flex-direction: row-reverse;
-    align-items: center;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 3rem 2.5rem;
-    gap: 4rem;
-  }
-}
-
-/* Hero image container */
 picture {
   display: block;
   width: 100%;
@@ -291,33 +287,9 @@ picture img {
   object-fit: cover;
 }
 
-@media (min-width: 1024px) {
-  picture {
-    flex: 0 0 480px;
-    max-width: 480px;
-  }
-
-  picture img {
-    border-radius: 12px;
-  }
-}
-
-/* Text content */
 .text-content {
   padding: 2.5rem 1.5rem 3rem;
   text-align: center;
-}
-
-@media (min-width: 1024px) {
-  .text-content {
-    flex: 1;
-    text-align: left;
-    padding: 4rem 0 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    gap: 2.5rem;
-  }
 }
 
 .text-content h1 {
@@ -329,25 +301,12 @@ picture img {
   margin-bottom: 1.2rem;
 }
 
-@media (min-width: 1024px) {
-  .text-content h1 {
-    margin-bottom: 0;
-  }
-}
-
 .text-content p {
   font-size: 1rem;
   line-height: 1.7;
   color: var(--medium-gray);
   max-width: 38ch;
   margin: 0 auto 2rem;
-}
-
-@media (min-width: 1024px) {
-  .text-content p {
-    margin: 0 0 2.5rem;
-    font-size: 1.05rem;
-  }
 }
 
 .btn-learn-more {
@@ -382,14 +341,6 @@ picture img {
   margin-top: 2rem;
 }
 
-@media (min-width: 1024px) {
-  .clients {
-    justify-content: flex-start;
-    gap: 2.5rem;
-    margin-top: 4rem;
-  }
-}
-
 .clients img {
   height: 14px;
   width: auto;
@@ -403,7 +354,7 @@ picture img {
 }
 
 /* =====================
-   FOOTER ATTRIBUTION
+   FOOTER
 ===================== */
 .attribution {
   font-size: 0.72rem;
@@ -423,7 +374,55 @@ picture img {
 }
 
 /* =====================
-   MOBILE NAV PANEL
+   DESKTOP  (>= 1024px)
+===================== */
+@media (min-width: 1024px) {
+  main {
+    flex-direction: row-reverse;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 3rem 2.5rem;
+    gap: 4rem;
+  }
+
+  picture {
+    flex: 0 0 480px;
+    max-width: 480px;
+  }
+
+  picture img {
+    border-radius: 12px;
+  }
+
+  .text-content {
+    flex: 1;
+    text-align: left;
+    padding: 4rem 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+  }
+
+  .text-content h1 { margin-bottom: 0; }
+
+  .text-content p {
+    margin: 0 0 2.5rem;
+    font-size: 1.05rem;
+  }
+
+  .clients {
+    justify-content: flex-start;
+    gap: 2.5rem;
+    margin-top: 4rem;
+  }
+}
+
+/* =====================
+   MOBILE  (< 1024px)
+   Nav panel slides in from the right.
+   z-index 500: above page content, but BELOW overlay (999)
+   so the overlay correctly covers and dims the nav panel.
 ===================== */
 @media (max-width: 1023px) {
   header {
@@ -432,6 +431,10 @@ picture img {
   }
 
   .menu-toggle {
+    display: block;
+  }
+
+  .close-nav-btn {
     display: block;
   }
 
@@ -448,9 +451,9 @@ picture img {
     justify-content: flex-start;
     padding: 5rem 1.5rem 2rem;
     gap: 2rem;
-    z-index: 150;
+    z-index: 500;
     transition: right 0.3s ease;
-    box-shadow: -10px 0 40px rgba(0,0,0,0.08);
+    box-shadow: -10px 0 40px rgba(0, 0, 0, 0.08);
     overflow-y: auto;
   }
 
@@ -465,16 +468,22 @@ picture img {
     width: 100%;
   }
 
+  .nav-link {
+    width: 100%;
+  }
+
   .nav-link > button {
     font-size: 1rem;
   }
 
+  /* In mobile panel, dropdowns are in-flow (not absolute) */
   .dropdown-list {
     position: static;
     box-shadow: none;
     padding: 1rem 0 0 1.2rem;
     display: none;
     gap: 0.85rem;
+    z-index: auto;
   }
 
   .nav-link.open .dropdown-list {
@@ -495,39 +504,7 @@ picture img {
     font-size: 0.95rem;
   }
 
-  .btn-login {
-    color: var(--medium-gray);
-  }
-
-  .btn-register {
-    border: 2px solid var(--medium-gray);
-  }
-
   .plain-link a {
     font-size: 1rem;
-  }
-}
-
-/* =====================
-   CLOSE BUTTON INSIDE NAV (mobile)
-===================== */
-.close-nav-btn {
-  position: absolute;
-  top: 1.2rem;
-  right: 1.5rem;
-  background: none;
-  border: none;
-  cursor: pointer;
-  display: none;
-}
-
-.close-nav-btn img {
-  width: 26px;
-  height: 26px;
-}
-
-@media (max-width: 1023px) {
-  .close-nav-btn {
-    display: block;
   }
 }
