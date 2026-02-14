@@ -55,7 +55,7 @@ a {
   position: fixed;
   inset: 0;
   background: rgba(0,0,0,0.5);
-  z-index: 90;
+  z-index: 160;
   visibility: hidden;
   opacity: 0;
   transition: opacity var(--transition), visibility var(--transition);
@@ -75,16 +75,13 @@ header {
   gap: 3.5rem;
   padding: 1.5rem 2.5rem;
   position: relative;
-  z-index: 100;
+  z-index: 200;
 }
 
-.logo {
-  flex-shrink: 0;
-}
-
-.logo img {
+img.logo {
   height: 27px;
   width: auto;
+  flex-shrink: 0;
 }
 
 nav {
@@ -92,6 +89,8 @@ nav {
   align-items: center;
   justify-content: space-between;
   flex: 1;
+  position: relative;
+  z-index: 200;
 }
 
 .nav-links {
@@ -452,6 +451,7 @@ picture img {
     z-index: 150;
     transition: right 0.3s ease;
     box-shadow: -10px 0 40px rgba(0,0,0,0.08);
+    overflow-y: auto;
   }
 
   nav.open {
