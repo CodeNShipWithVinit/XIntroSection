@@ -57,11 +57,20 @@ a {
   position: fixed;
   inset: 0;
   background: rgba(0, 0, 0, 0.5);
-  z-index: 600;
+  z-index: 499;
   visibility: hidden;
   opacity: 0;
   transition: opacity var(--transition), visibility var(--transition);
   pointer-events: none;
+}
+
+/* On mobile, constrain the overlay to only cover the left portion of the screen
+   so it never overlaps the nav panel (which is max 280px / 68% from the right).
+   This means the overlay sits below the nav's stacking context entirely. */
+@media (max-width: 767px) {
+  .overlay {
+    right: 32%;
+  }
 }
 
 .overlay.active {
@@ -262,7 +271,6 @@ nav {
   border: none;
   cursor: pointer;
   display: none;
-  z-index: 700;
 }
 
 .close-nav-btn img {
